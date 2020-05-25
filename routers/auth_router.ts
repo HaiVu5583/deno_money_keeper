@@ -1,5 +1,5 @@
 import { RouterContext } from "https://deno.land/x/oak/mod.ts";
-import { router } from "../router.ts";
+import { router } from "./index.ts";
 import * as dotenv from "https://deno.land/x/denoenv/mod.ts";
 // import { validateJwt } from "https://deno.land/x/djwt/validate.ts";
 import { ErrorResponse } from "../network/error_response.ts";

@@ -1,6 +1,6 @@
 import { Router, RouterContext } from "https://deno.land/x/oak/mod.ts";
-import { HTTP_STATUS_CODE } from "./constants.ts";
-import { setupAuthRouter } from "./auth/auth_router.ts";
+import { HTTP_STATUS_CODE } from "../constants.ts";
+import { setupAuthRouter } from "./auth_router.ts";
 
 export const router = new Router();
 

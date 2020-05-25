@@ -4,7 +4,7 @@ import {
   Context,
 } from "https://deno.land/x/oak/mod.ts";
 import { moment } from "https://deno.land/x/moment/moment.ts";
-import { router } from "./router.ts";
+import { router } from "./routers/index.ts";
 import { HTTP_STATUS_CODE } from "./constants.ts";
 
 const app = new Application(); // Global error
