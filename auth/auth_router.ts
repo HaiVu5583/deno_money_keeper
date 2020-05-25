@@ -2,6 +2,7 @@ import { RouterContext } from "https://deno.land/x/oak/mod.ts";
 import { router } from "../router.ts";
 import * as dotenv from "https://deno.land/x/denoenv/mod.ts";
 // import { validateJwt } from "https://deno.land/x/djwt/validate.ts";
+import { ErrorResponse } from "../network/error_response.ts";
 import {
   makeJwt,
   setExpiration,
@@ -36,10 +37,11 @@ export function setupAuthRouter() {
       ctx.response.status = HTTP_STATUS_CODE.OK;
     } catch (error) {
       if (error instanceof SyntaxError) {
-        ctx.response.body = {
+        const errorRes: ErrorResponse = {
           code: HTTP_STATUS_CODE.INVALID_PARAM,
           message: "Invalid JSON param",
         };
+        ctx.response.body = errorRes;
         ctx.response.status = HTTP_STATUS_CODE.INVALID_PARAM;
       }
       console.log("Error generate_token: ", error);
