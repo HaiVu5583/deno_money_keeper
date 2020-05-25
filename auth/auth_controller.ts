@@ -1,2 +1,2 @@
-export const generate_token = (username, password) => {
+export const generate_token = (username: string, password: string) => {
 };

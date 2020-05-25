@@ -13,6 +13,10 @@ import { HTTP_STATUS_CODE } from "../constants.ts";
 export function setupAuthRouter() {
   router.post("/generate_token", async function (ctx: RouterContext) {
     try {
+      const body = await ctx.request.body();
+      const username = body?.value?.username;
+      const password = body?.value?.password;
+      console.log("user name password", body);
       const config = dotenv.config();
       console.log(config.JWT_SECRET);
       const payload: Payload = {
@@ -31,7 +35,14 @@ export function setupAuthRouter() {
       };
       ctx.response.status = HTTP_STATUS_CODE.OK;
     } catch (error) {
-      throw error;
+      if (error instanceof SyntaxError) {
+        ctx.response.body = {
+          code: HTTP_STATUS_CODE.INVALID_PARAM,
+          message: "Invalid JSON param",
+        };
+        ctx.response.status = HTTP_STATUS_CODE.INVALID_PARAM;
+      }
+      console.log("Error generate_token: ", error);
     }
   });
 
