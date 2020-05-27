@@ -1,5 +1,4 @@
 import { RouterContext } from "https://deno.land/x/oak/mod.ts";
-import { router } from "./index.ts";
 import * as dotenv from "https://deno.land/x/denoenv/mod.ts";
 // import { validateJwt } from "https://deno.land/x/djwt/validate.ts";
 import { ErrorResponse } from "../network/error_response.ts";
@@ -11,8 +10,8 @@ import {
 } from "https://deno.land/x/djwt/create.ts";
 import { HTTP_STATUS_CODE } from "../constants.ts";
 
-export function setupAuthRouter() {
-  router.post("/generate_token", async function (ctx: RouterContext) {
+export default {
+  generateToken: async function (ctx: RouterContext) {
     try {
       const body = await ctx.request.body();
       const username = body?.value?.username;
@@ -46,9 +45,8 @@ export function setupAuthRouter() {
       }
       console.log("Error generate_token: ", error);
     }
-  });
-
-  router.get("/user_info", async function (ctx: RouterContext) {
+  },
+  getUserInfo: async function (ctx: RouterContext) {
     ctx.response.body = {
       username: "haivl",
       dob: "1993-11-16",
@@ -57,5 +55,5 @@ export function setupAuthRouter() {
       star: 3,
     };
     ctx.response.status = HTTP_STATUS_CODE.OK;
-  });
-}
+  },
+};
