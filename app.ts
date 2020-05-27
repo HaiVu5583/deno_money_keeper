@@ -6,6 +6,7 @@ import {
 import { moment } from "https://deno.land/x/moment/moment.ts";
 import { router } from "./routers/index.ts";
 import { HTTP_STATUS_CODE } from "./constants.ts";
+import { validateToken } from "./middlewares/AuthMiddleware.ts";
 
 const app = new Application(); // Global error
 // app.use(async (ctx, next) => {
@@ -48,6 +49,8 @@ app.use(async (ctx: Context, next) => {
     }`,
   );
 });
+
+app.use(validateToken);
 
 // Use the router
 app.use(router.routes());

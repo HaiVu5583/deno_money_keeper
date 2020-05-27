@@ -1,7 +1,7 @@
 import { RouterContext } from "https://deno.land/x/oak/mod.ts";
 import * as dotenv from "https://deno.land/x/denoenv/mod.ts";
 // import { validateJwt } from "https://deno.land/x/djwt/validate.ts";
-import { ErrorResponse } from "../network/error_response.ts";
+import { ErrorResponse } from "../network/ErrorResponse.ts";
 import {
   makeJwt,
   setExpiration,
@@ -18,10 +18,9 @@ export default {
       const password = body?.value?.password;
       console.log("user name password", body);
       const config = dotenv.config();
-      console.log(config.JWT_SECRET);
       const payload: Payload = {
         iss: "haivl",
-        exp: setExpiration(new Date().getTime() + 60000),
+        exp: setExpiration(new Date().getTime() + parseInt(config.EXPIRE_TIME)),
         username: "haivu",
         role: "admin",
       };

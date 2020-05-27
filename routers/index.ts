@@ -4,6 +4,8 @@ import AuthController from "../controllers/AuthController.ts";
 
 export const router = new Router();
 
+export const UNAUTHORIZED_ROUTER = ["/generate_token"];
+
 router
   .get("/", async (ctx: RouterContext) => {
     ctx.response.status = HTTP_STATUS_CODE.OK;
